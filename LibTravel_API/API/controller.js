@@ -42,7 +42,7 @@ app.use(function (req, res, next) {
      setTimeout(() => {
          //console.log(resItem.getResultItem())
          var send = resItem.getResultItem()
-         console.log(send)
+         //console.log(send)
          //resItem.clearItem()
         // console.log("results",resItem.getResultItem())
          
