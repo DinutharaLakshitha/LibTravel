@@ -2,6 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const _= require('lodash')
+const port = process.env.PORT || 3000;
 
 var {mongoose} = require('./utilities/mongoose');
 var {library} = require('./models/library');
@@ -65,6 +66,6 @@ app.post('/reglibrary', (req, res) => {
 
 
 
- app.listen(3000,()=>{
-     console.log('started on port 3000');
+ app.listen(port,()=>{
+     console.log(`started on port ${port}`);
  });

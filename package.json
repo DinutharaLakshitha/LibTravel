@@ -1,0 +1,21 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node LibTravel_API/API/controller.js"
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DinutharaLakshitha/LibTravel.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DinutharaLakshitha/LibTravel/issues"
+  },
+  "homepage": "https://github.com/DinutharaLakshitha/LibTravel#readme"
+}
