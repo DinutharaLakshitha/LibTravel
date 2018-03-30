@@ -56,6 +56,16 @@ librarySchema.methods.genarateAuthToken = function () {
   });
 };
 
+librarySchema.methods.removeToken = function (token){
+  var lib = this;
+
+  return lib.update({
+    $pull: {
+      tokens:{token}
+    }
+  });
+}
+
 librarySchema.statics.findByToken = function (token) {
   var library = this;
   var decoded;
@@ -70,6 +80,26 @@ librarySchema.statics.findByToken = function (token) {
     '_id': decoded._id,
     'tokens.token': token,
     'tokens.access': 'auth'
+  });
+}
+
+librarySchema.statics.findByCredentials = function (userName,password){
+  var library = this;
+
+  return library.findOne({userName}).then((lib)=>{
+    if(!lib){
+      return Promise.reject();
+    }
+
+    return new Promise((resolve,reject)=>{
+      bcrypt.compare(password,lib.password,(err,res)=>{
+        if(res){
+          resolve(lib)
+        }else{
+          reject();
+        }
+      });
+    });
   });
 }
 
@@ -88,6 +118,8 @@ librarySchema.pre('save', function (next) {
   }
 
 });
+
+
 
 
 var library = mongoose.model('library', librarySchema);
