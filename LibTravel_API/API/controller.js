@@ -9,16 +9,17 @@ var {library} = require('./models/library');
 var {searchObject} = require('./models/searchObject');
 var requestHandler = require('./requestHandler');
 var resultItem = require('./models/resultItem');
+var {authenticate} = require('./middleware/authenticate')
 
 
  var app = express();
 
  app.use(bodyParser.json());
 
-/*app.use(function (req, res, next) {
+app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    //res.setHeader('Access-Control-Allow-Origin', '*');
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     // Request headers you wish to allow
@@ -28,7 +29,7 @@ var resultItem = require('./models/resultItem');
     res.setHeader('Access-Control-Allow-Credentials', true);
     // Pass to next layer of middleware
     next();
-});*/
+});
 
  app.post('/search',(req,res)=>{
     // console.log("Main system got the request");
@@ -51,7 +52,7 @@ var resultItem = require('./models/resultItem');
          res.send(JSON.stringify(send));
      }, 4000)
  });
-app.post('/reglibrary', (req, res) => {
+app.post('/library/register', (req, res) => {
     var body = _.pick(req.body,['userName','password','url']);
     var lib = new library(body);
 
@@ -62,6 +63,12 @@ app.post('/reglibrary', (req, res) => {
     }).catch((e)=>{
         res.status(400).send(e);
     })
+});
+
+
+
+app.get('/library/delete',authenticate,(req,res)=>{
+   res.send(req.lib)
 });
 
 

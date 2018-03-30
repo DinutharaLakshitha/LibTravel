@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs')
 
 
 var librarySchema = new mongoose.Schema({
@@ -19,7 +20,7 @@ var librarySchema = new mongoose.Schema({
   url: {
     type: String,
     required: true,
-    unique:true,
+    unique: true,
     validate: {
       validator: validator.isURL,
       message: 'not a URL'
@@ -54,6 +55,39 @@ librarySchema.methods.genarateAuthToken = function () {
     return token;
   });
 };
+
+librarySchema.statics.findByToken = function (token) {
+  var library = this;
+  var decoded;
+
+  try {
+    decoded = jwt.verify(token, 'abc123');
+  } catch (e) {
+    return Promise.reject();
+  }
+
+  return library.findOne({
+    '_id': decoded._id,
+    'tokens.token': token,
+    'tokens.access': 'auth'
+  });
+}
+
+librarySchema.pre('save', function (next) {
+  var lib = this;
+
+  if (lib.isModified('password')) {
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(lib.password, salt, (err, hash) => {
+        lib.password = hash;
+        next();
+      });
+    });
+  } else {
+    next();
+  }
+
+});
 
 
 var library = mongoose.model('library', librarySchema);
