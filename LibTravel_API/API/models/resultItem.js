@@ -12,7 +12,15 @@ method.addResult = function (result) {
 
 method.getResultItem = function (){
 
-    return JSON.parse(this._result.replace(/}{/g, ","))
+   
+    if (Object.keys(this._result).length){
+        return JSON.parse(this._result.replace(/}{/g, ","))
+    }
+    else{
+        return {result : "empty"}
+    }
+    
+    
 }
 
 method.clearItem = function(){
