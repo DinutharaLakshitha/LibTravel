@@ -10,13 +10,15 @@ var { searchObject } = require('./models/searchObject');
 var requestHandler = require('./requestHandler');
 var resultItem = require('./models/resultItem');
 var { authenticate } = require('./middleware/authenticate')
+var cors = require('cors')
 
 
 var app = express();
-
+app.use(cors())
 app.use(bodyParser.json());
 
-app.use(function (req, res, next) {
+
+/*app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
     //res.setHeader('Access-Control-Allow-Origin', '*');
@@ -29,7 +31,7 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Credentials', true);
     // Pass to next layer of middleware
     next();
-});
+});*/
 
 app.post('/search', (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
