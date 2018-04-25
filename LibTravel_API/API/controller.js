@@ -17,6 +17,16 @@ var app = express();
 //app.use(cors())
 app.use(bodyParser.json());
 
+app.use(function (req, res, next) {
+
+    res.header("Access-Control-Allow-Origin", "*");
+
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+    next();
+
+});
+
 
 /*app.use(function (req, res, next) {
 
@@ -32,8 +42,8 @@ app.use(bodyParser.json());
     // Pass to next layer of middleware
     next();
 });*/
-app.options('/search', cors())
-app.post('/search',cors(), (req, res) => {
+//app.options('/search', cors())
+app.post('/search', (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     let resItem = new (require('./models/resultItem'))
     requestHandler.requestToNeighbours(req, res, (result) =>
