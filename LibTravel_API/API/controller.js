@@ -32,7 +32,7 @@ app.use(bodyParser.json());
     // Pass to next layer of middleware
     next();
 });*/
-
+app.options('/search', cors())
 app.post('/search', (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     let resItem = new (require('./models/resultItem'))
