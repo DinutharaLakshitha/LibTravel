@@ -14,7 +14,7 @@ var cors = require('cors')
 
 
 var app = express();
-app.use(cors())
+//app.use(cors())
 app.use(bodyParser.json());
 
 
@@ -33,7 +33,7 @@ app.use(bodyParser.json());
     next();
 });*/
 app.options('/search', cors())
-app.post('/search', (req, res) => {
+app.post('/search',cors(), (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     let resItem = new (require('./models/resultItem'))
     requestHandler.requestToNeighbours(req, res, (result) =>
