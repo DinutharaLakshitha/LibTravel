@@ -10,7 +10,7 @@ var { searchObject } = require('./models/searchObject');
 var requestHandler = require('./requestHandler');
 var resultItem = require('./models/resultItem');
 var { authenticate } = require('./middleware/authenticate')
-var cors = require('cors')
+//var cors = require('cors')
 
 
 var app = express();
