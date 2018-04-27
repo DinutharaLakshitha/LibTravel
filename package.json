@@ -8,6 +8,9 @@
     "start": "node LibTravel_API/API/controller.js"
 
   },
+  "engines": {
+    "node": "9.4.0"
+  }, 
   "repository": {
     "type": "git",
     "url": "git+https://github.com/DinutharaLakshitha/LibTravel.git"
