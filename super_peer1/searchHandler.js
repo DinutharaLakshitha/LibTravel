@@ -18,7 +18,7 @@ exports.searchInLib = function (req,callback) {
             setTimeout(() => {
                 if (result.length>0) {
                     console.log(result)
-                    callback(JSON.stringify({ 3001: "http://www.3001.com" }))
+                    callback(JSON.stringify({ 3001: "http://www.fb.com" }))
                 }
                 else {
                     console.log("empty result")
