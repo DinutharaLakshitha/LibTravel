@@ -25,7 +25,10 @@ app.post('/search', (req, res) => {
  
     setTimeout(() => {
         //console.log(results)
+        //console.log(resItem.getResultItem())
         var response = resItem.getResultItem().replace(/}{/g, ",")
+        var response = response.replace(/,,/g, ",")
+        //console.log(response)
         console.log(JSON.parse("{" + response.substr(2)))
         res.send(JSON.stringify(JSON.parse("{"+response.substr(2))));
     }, 3000)

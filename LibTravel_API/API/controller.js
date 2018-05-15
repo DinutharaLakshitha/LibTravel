@@ -52,6 +52,7 @@ app.post('/search', (req, res) => {
     );
     setTimeout(() => {
         var send = resItem.getResultItem()
+        console.log(send)
         res.send(JSON.stringify(send));
     }, 4000)
 });
