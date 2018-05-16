@@ -55,7 +55,7 @@ app.post('/search', (req, res) => {
     setTimeout(() => {
         var send = resItem.getResultItem()
         console.log(send)
-        res.send(JSON.stringify(send));
+        res.status(200).send(JSON.stringify(send));
     }, 4000)
 });
 app.post('/library/register', (req, res) => {
@@ -65,7 +65,7 @@ app.post('/library/register', (req, res) => {
     lib.save().then(() => {
         return lib.genarateAuthToken();
     }).then((token) => {
-        res.header('x-auth', token).send(lib);
+        res.status(200).header('x-auth', token).send(lib);
     }).catch((e) => {
         res.status(400).send(e);
     })
@@ -99,3 +99,5 @@ app.delete('/library/token', authenticate, (req, res) => {
 app.listen(port, () => {
     console.log(`started on port ${port}`);
 });
+
+module.exports = {app};

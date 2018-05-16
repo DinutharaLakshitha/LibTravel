@@ -4,13 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha Testing/**/*.test.js",
+    "test-watch": "nodemon --exec \"npm test\"",
     "start": "node LibTravel_API/API/controller.js"
-
   },
   "engines": {
     "node": "9.4.0"
-  }, 
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/DinutharaLakshitha/LibTravel.git"
@@ -32,5 +32,11 @@
   "bugs": {
     "url": "https://github.com/DinutharaLakshitha/LibTravel/issues"
   },
-  "homepage": "https://github.com/DinutharaLakshitha/LibTravel#readme"
+  "homepage": "https://github.com/DinutharaLakshitha/LibTravel#readme",
+  "devDependencies": {
+    "expect": "^1.20.2",
+    "mocha": "^3.0.2",
+    "nodemon": "^1.10.2",
+    "supertest": "^2.0.0"
+  }
 }

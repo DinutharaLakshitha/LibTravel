@@ -1,5 +1,5 @@
 const request = require('request');
-var neighbours = ['http://d204e5b8.ngrok.io/search','http://0fd56eb6.ngrok.io/search'];
+var neighbours = ['http://86003aa1.ngrok.io/search','http://cf22b609.ngrok.io/search'];
 //var neighbours = ['http://localhost:3002/search'];
 var peerResults = "";
 var temp
