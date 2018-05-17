@@ -1,29 +1,28 @@
 
 var method = resultItem.prototype;
 
-function resultItem() {
-    //this._age = age;
+function resultItem() {                  //constructor
     this._result = ""
 }
 
 method.addResult = function (result) {
-    this._result+=result
+    this._result += result
 };
 
-method.getResultItem = function (){
+method.getResultItem = function () {
 
-   
-    if (Object.keys(this._result).length){
+
+    if (Object.keys(this._result).length) {
         return JSON.parse(this._result.replace(/}{/g, ","))
     }
-    else{
-        return {result : "empty"}
+    else {
+        return { result: "empty" }
     }
-    
-    
+
+
 }
 
-method.clearItem = function(){
+method.clearItem = function () {
     this._result = ""
 }
 

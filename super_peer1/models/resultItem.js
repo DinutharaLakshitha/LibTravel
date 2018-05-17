@@ -1,7 +1,6 @@
 var method = resultItem.prototype;
 
-function resultItem() {
-    //this._age = age;
+function resultItem() {              //constructor
     this._result = ""
 }
 

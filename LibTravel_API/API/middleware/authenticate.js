@@ -1,8 +1,8 @@
-var {library} = require('./../models/library');
+var { library } = require('./../models/library');
 
-var authenticate = (req, res, next) => {
-    var token = req.header('x-auth');
-    library.findByToken(token).then((lib) => {
+var authenticate = (req, res, next) => {                  //This middleware is used to authenticate the users
+    var token = req.header('x-auth');                     //Get the token from the request header
+    library.findByToken(token).then((lib) => {            //this token is used to search in the library
         if (!lib) {
             return Promise.reject();
         }
@@ -14,4 +14,4 @@ var authenticate = (req, res, next) => {
     })
 }
 
-module.exports = {authenticate}
+module.exports = { authenticate }                          //the module is exported

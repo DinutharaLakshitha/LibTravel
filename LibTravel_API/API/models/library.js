@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs')
 
 
-var librarySchema = new mongoose.Schema({
+var librarySchema = new mongoose.Schema({                   //library sceme
   userName: {
     type: String,
     required: true,
@@ -42,10 +42,10 @@ var librarySchema = new mongoose.Schema({
   }
 });
 
-librarySchema.methods.genarateAuthToken = function () {
+librarySchema.methods.genarateAuthToken = function () {                             //Method to genarate authentication tokens
   var lib = this;
   var access = 'auth';
-  var token = jwt.sign({ _id: lib._id.toHexString(), access }, 'abc123').toString();
+  var token = jwt.sign({ _id: lib._id.toHexString(), access }, 'abc123').toString();//salting
 
   lib.tokens = lib.tokens.concat([{ access, token }]);
 
@@ -56,17 +56,17 @@ librarySchema.methods.genarateAuthToken = function () {
   });
 };
 
-librarySchema.methods.removeToken = function (token){
+librarySchema.methods.removeToken = function (token) {                                //Method to remove authenticate token from a library
   var lib = this;
 
   return lib.update({
     $pull: {
-      tokens:{token}
+      tokens: { token }
     }
   });
 }
 
-librarySchema.statics.findByToken = function (token) {
+librarySchema.statics.findByToken = function (token) {                                //method to search in the database by the authentication token
   var library = this;
   var decoded;
 
@@ -83,19 +83,19 @@ librarySchema.statics.findByToken = function (token) {
   });
 }
 
-librarySchema.statics.findByCredentials = function (userName,password){
+librarySchema.statics.findByCredentials = function (userName, password) {             //get library details by the username and password
   var library = this;
 
-  return library.findOne({userName}).then((lib)=>{
-    if(!lib){
+  return library.findOne({ userName }).then((lib) => {
+    if (!lib) {
       return Promise.reject();
     }
 
-    return new Promise((resolve,reject)=>{
-      bcrypt.compare(password,lib.password,(err,res)=>{
-        if(res){
+    return new Promise((resolve, reject) => {
+      bcrypt.compare(password, lib.password, (err, res) => {
+        if (res) {
           resolve(lib)
-        }else{
+        } else {
           reject();
         }
       });
@@ -103,11 +103,11 @@ librarySchema.statics.findByCredentials = function (userName,password){
   });
 }
 
-librarySchema.pre('save', function (next) {
+librarySchema.pre('save', function (next) {                                           //this method is used to hash the password
   var lib = this;
 
   if (lib.isModified('password')) {
-    bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.genSalt(10, (err, salt) => {                                               //password salting
       bcrypt.hash(lib.password, salt, (err, hash) => {
         lib.password = hash;
         next();
